@@ -1,4 +1,4 @@
-interface Crouses {
+interface Courses<T> {
   id?: number;
   name: string;
   thumbnail: string;
@@ -10,6 +10,7 @@ interface Crouses {
   mentor_id: number;
   created_at?: string;
   updated_at?: string;
+  courses: T;
 }
 
 interface ICourses {

@@ -3,18 +3,23 @@ import { Link, withRouter } from "react-router-dom";
 // jika mau import svg di react
 // import { ReactComponent as Logo } from "../assets/images/logo.svg";
 import propsTyps from "prop-types";
+import { selectUser } from "../redux/features/users";
+import { useAppSelector } from "../redux/hooks";
 
 interface HProps {
     onLight: boolean;
     location:any
 }
 const  Header: React.FC<any> = ({ onLight, location }) => {
-  const linkColor = onLight ? "text-gray-900" : "text-white";
 
-  const linkCTA =
+
+
+  const linkColor: string = onLight ? "text-gray-900" : "text-white";
+
+  const linkCTA: string =
     location.pathname.indexOf("/login") > -1 ? `/register` : `/login`;
 
-  const textCTA = location.pathname.indexOf("/login") > -1 ? "Daftar" : "Masuk";
+  const textCTA: string = location.pathname.indexOf("/login") > -1 ? "Daftar" : "Masuk";
 
   return (
     <header className="flex justify-between items-center">
