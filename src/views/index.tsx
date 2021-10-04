@@ -1,11 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import logo from "../logo.svg";
-import { Counter } from "../Counter";
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <div className="container mx-auto pt-10">
       This is Home
     </div>
   );
