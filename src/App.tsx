@@ -1,58 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
+import "./assets/css/style.css";
+import GuessRoute from "./components/routes/GuessRoute";
+import UsersApi from "./constants/api/users";
+import { setUser } from "./redux/features/users";
+import { useAppDispatch } from "./redux/hooks";
+import Home from "./views";
+import Login from "./views/login";
+import People from "./views/people";
+import Register from "./views/register";
 
-function App() {
+// import Authorization from "./config/axios/authorization";
+
+const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const userApi = new UsersApi();
+    userApi.details().then((response) => {
+      dispatch(setUser(response.data));
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <Router>
+        <Switch>
+          <GuessRoute path="/login" component={Login} />
+          <GuessRoute path="/register" component={Register} />
+          <Route path="/people">
+            <People />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
