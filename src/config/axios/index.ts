@@ -4,6 +4,9 @@ declare module "axios" {
   interface AxiosResponse<T> extends Promise<T> {}
 }
 
+// abstract class cant created an object
+// this auth not yet completed token compire
+// first time using OOP js/TS
 abstract class HTTPClient {
   protected readonly instance: AxiosInstance;
 

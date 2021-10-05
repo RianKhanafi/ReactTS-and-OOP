@@ -13,7 +13,6 @@ class Crouses extends HTTPClient {
       .then((res) => res.data);
   };
 
-  // join: (id) => axios.post("/my-courses", { course_id: id }),
   public mine = () => {
     return this.instance.get<any>("/my-courses");
   };
