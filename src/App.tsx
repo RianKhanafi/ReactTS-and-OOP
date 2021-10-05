@@ -36,6 +36,11 @@ const App: React.FC = () => {
           <MemberRoute exact path="/" component={Home}/>
           <MemberRoute
             exact
+            path="/courses/:class/:chapter/:uid"
+            component={DetailClass}
+          ></MemberRoute>
+          <MemberRoute
+            exact
             path="/courses/:class/"
             component={DetailClass}
           ></MemberRoute>
@@ -50,5 +55,7 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+
 
 export default App;

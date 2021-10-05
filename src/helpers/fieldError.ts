@@ -1,9 +1,12 @@
-export default (errors: Array<any>) => {
-  //   console.log(errors.response);
+interface IError<T> {
+  field: T;
+}
+
+export default <T extends {}>(errors: IError<T>[]) => {
   const fieldErrors =
     typeof errors === "object" &&
-    errors?.reduce((listErrors: any, error: { field: string | number }) => {
-      if (error?.field) listErrors[error.field] = error;
+    errors?.reduce((listErrors: any, error) => {
+      if (error?.field) listErrors["a"] = error;
       return listErrors;
     }, {});
 

@@ -1,7 +1,11 @@
 import React from "react";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const PrivateRoot: React.FC<any> = ({ fallbackUrl, fallbackText, external }) => {
+const PrivateRoot: React.FC<any> = ({
+  fallbackUrl,
+  fallbackText,
+  external,
+}) => {
   return (
     <section className="h-screen flex flex-col items-center ">
       <img

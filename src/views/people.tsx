@@ -1,8 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ListPeople from "../components/listPeople";
 import Crouses from "../constants/api/courses";
-import PeopleApi from "../constants/api/people";
 import { IState, User } from "./addNews";
 
 const People: React.FC = () => {

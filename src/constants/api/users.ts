@@ -16,6 +16,9 @@ class UsersApi extends HTTPClient {
   public register = (payload: IUserResgiter) => {
     return this.instance.post<IUserResgiter>("/users/register", payload);
   };
+
+  public logout = () => this.instance.post("/users/logout");
 }
 
 export default UsersApi;
+export const userApi = new UsersApi();

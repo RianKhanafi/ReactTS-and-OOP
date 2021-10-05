@@ -1,15 +1,10 @@
-import { ChangeEvent } from "hoist-non-react-statics/node_modules/@types/react";
 import React from "react";
 import { withRouter } from "react-router";
-
-import UsersApi from "../constants/api/users";
-import useForm from "../helpers/hoox/useForm";
-import { RouteComponentProps } from "react-router";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectUser, setUser } from "../redux/features/users";
 import Input from "../components/form/input";
+import { userApi } from "../constants/api/users";
 import fieldError from "../helpers/fieldError";
-import { AxiosError } from "axios";
+import useForm from "../helpers/hoox/useForm";
+
 type IState = {
   userLogin: IUserResgiter[] &
     {
@@ -25,12 +20,9 @@ const RegisterForm: React.FC<any> = ({ history }) => {
 
   const [errors, setErrors] = React.useState<any>(null);
 
-
   // SyntheticEvent if you dont quite care
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-
-    const userApi = new UsersApi();
 
     userApi
       .register({
@@ -40,14 +32,14 @@ const RegisterForm: React.FC<any> = ({ history }) => {
         profession: state.profession,
       })
       .then((resposne) => {
-          history.push("/login")
-      }).catch((err: any) =>{
-         setErrors(err?.response?.data?.message);
+        history.push("/login");
       })
+      .catch((err: any) => {
+        setErrors(err?.response?.data?.message);
+      });
   };
 
   const ERROR = fieldError(errors);
-
 
   return (
     <>
@@ -60,7 +52,7 @@ const RegisterForm: React.FC<any> = ({ history }) => {
           <form onSubmit={onSubmit}>
             <Input
               label="Full name"
-              error={ERROR?.name?.message??""}
+              error={ERROR?.name?.message ?? ""}
               name="name"
               type="text"
               placeholder="Your Full Name"
@@ -70,7 +62,7 @@ const RegisterForm: React.FC<any> = ({ history }) => {
 
             <Input
               label="Email Address"
-              error={ERROR?.email?.message??""}
+              error={ERROR?.email?.message ?? ""}
               name="email"
               type="email"
               placeholder="Your email address"
@@ -80,7 +72,7 @@ const RegisterForm: React.FC<any> = ({ history }) => {
 
             <Input
               label="Password"
-              error={ERROR?.password?.message??""}
+              error={ERROR?.password?.message ?? ""}
               name="password"
               type="password"
               placeholder="Your password"

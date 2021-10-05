@@ -1,38 +1,28 @@
 import React, { useEffect } from "react";
-import Youtube from "react-youtube";
-
 import { RouteComponentProps } from "react-router-dom";
-
-// import {
-//   statusCourses,
-//   watchCourses,
-//   messageCourses,
-// } from "store/actions/courses";
-
-// import courses from "constants/api/courses";
-// import Loading from "parts/loading";
-// import Centered from "parts/Centered";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectCourse, setWatch } from "../redux/features/courses";
-import Sidebar from "../parts/Sidebar";
+import Youtube from "react-youtube";
 import { courses } from "../constants/api/courses";
 import SidebarClass from "../parts/SidebarClass";
+import { selectCourse, setWatch } from "../redux/features/courses";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-const DetailClass: React.FC<RouteComponentProps<any>> = ({ match, history }) => {
-    const dispatch = useAppDispatch();
+
+
+const DetailClass: React.FC<RouteComponentProps<any>> = ({
+  match,
+  history,
+}) => {
+  const dispatch = useAppDispatch();
 
   const COURSES = useAppSelector(selectCourse);
-
-  console.log(COURSES)
 
   useEffect(() => {
     window.scroll(0, 0);
 
-
     courses
       .details(match.params.class)
       .then((res: any) => {
-          console.log(res)
+        console.log(res);
         if (res.chapters.length === 0)
           throw new Error("Class minght be not ready yet");
         else dispatch(setWatch(res));
@@ -42,16 +32,13 @@ const DetailClass: React.FC<RouteComponentProps<any>> = ({ match, history }) => 
       });
   }, [match.params.class, dispatch]);
 
-//   if (COURSES.status === "loading") return <Loading></Loading>;
-//   if (COURSES.status === "error")
-//     return <Centered>{COURSES?.message?.error ?? "Error"}</Centered>;
+  //   if (COURSES.status === "loading") return <Loading></Loading>;
+  //   if (COURSES.status === "error")
+  //     return <Centered>{COURSES?.message?.error ?? "Error"}</Centered>;
 
   let currentChapter, currentLessaion;
 
-
-  if (
-    COURSES.courses[match.params.class]
-  ) {
+  if (COURSES.courses[match.params.class]) {
     currentChapter =
       COURSES.courses[match.params.class]?.chapters?.find(
         (chapter: any) => +chapter.id === +match.params.id
@@ -59,16 +46,15 @@ const DetailClass: React.FC<RouteComponentProps<any>> = ({ match, history }) => 
 
     currentLessaion =
       currentChapter?.lessions?.find(
-        (lession:any) => lession.video === match.params.uid
+        (lession: any) => lession.video === match.params.uid
       ) ?? currentChapter?.lessions?.[0];
   }
 
-
-//   console.log( COURSES.courses[match.params.class].chapters, COURSES.count);
   const nextVideo = () => {};
+  
   return (
     <div className="flex">
-{COURSES.courses?.[match.params.class]?.chapters?.length > 0 && (
+      {COURSES.courses?.[match.params.class]?.chapters?.length > 0 && (
         <>
           <SidebarClass
             data={COURSES.courses[match.params.class]}
@@ -117,7 +103,6 @@ const DetailClass: React.FC<RouteComponentProps<any>> = ({ match, history }) => 
       )}
     </div>
   );
-}
-
+};
 
 export default DetailClass;

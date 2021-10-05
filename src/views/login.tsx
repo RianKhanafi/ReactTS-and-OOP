@@ -5,14 +5,14 @@ import Footer from "../parts/Footer";
 const Login: React.FC = () => {
   return (
     <>
-    <section className="container mx-auto pt-10">
-      <Header onLight/>
-    </section>
+      <section className="container mx-auto pt-10">
+        <Header onLight />
+      </section>
       <section className="container mx-auto pt-10">
         <LoginForm />
       </section>
       <section>
-        <Footer/>
+        <Footer />
       </section>
     </>
   );

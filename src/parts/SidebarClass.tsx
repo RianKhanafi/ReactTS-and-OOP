@@ -1,11 +1,11 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import { ReactComponent as ArrowBack } from "../assets/images/icon-arrow-back.svg";
 
-import { Link, withRouter } from "react-router-dom";
-
+// all pf this using any
 function SidebarClass({ match, data, defaultUri }:any) {
   const getNavLinkClass = (path: string) => {
-    return match.url === path || defaultUri === path
+    return match.url === path
       ? "text-teal-500"
       : "text-indigo-900";
   };
@@ -15,7 +15,7 @@ function SidebarClass({ match, data, defaultUri }:any) {
     console.log("a", chapter);
     list.push(
       <li key={`${chapter.courses_id}-${index}`}>
-        <span className="nav-header relative block py-3 px-5 bg-indigo-800 text-white text-left">
+        <span className="nav-header relative block py-3 px-5 bg-indigo-900 text-white text-left">
           {chapter?.name ?? "Chapter name"}
         </span>
       </li>

@@ -2,7 +2,7 @@ import { ChangeEvent } from "hoist-non-react-statics/node_modules/@types/react";
 import React from "react";
 import { withRouter } from "react-router";
 
-import UsersApi from "../constants/api/users";
+import UsersApi, { userApi } from "../constants/api/users";
 import useForm from "../helpers/hoox/useForm";
 import { RouteComponentProps } from "react-router";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -27,7 +27,7 @@ const LoginForm: React.FC<any> = ({ history }) => {
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const userApi = new UsersApi();
+    
 
 
     userApi

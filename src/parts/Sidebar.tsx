@@ -1,10 +1,7 @@
 import React from "react";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { ReactComponent as DefaultUser } from "../assets/images/default-avatar.svg";
-
-import { Link, withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
-
-import { RouteComponentProps } from "react-router-dom";
+import { userApi } from "../constants/api/users";
 import { selectUser } from "../redux/features/users";
 import { useAppSelector } from "../redux/hooks";
 
@@ -19,10 +16,10 @@ const Sidebar: React.FC<RouteComponentProps> = ({ match, history }) => {
   //   const USERS = useSelector((state) => state.users);
 
   const logout = () => {
-    // users.logout().then((res) => {
-    //   localStorage.removeItem("MICRO:token");
-    //   history.push("/login");
-    // });
+    userApi.logout().then((res) => {
+      localStorage.removeItem("MICRO:token");
+      history.push("/login");
+    });
   };
   return (
     <aside
